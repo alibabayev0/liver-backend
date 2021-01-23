@@ -5,6 +5,7 @@ Documentation(Swagger)
 oAuth 2 Tests.
 
 #InProgress
+Index.js of folders
 
 
 #In Test
@@ -20,4 +21,4 @@ Jest(config)
 Passport
 Roles
 Rest
-plugins index.js
+Plugins in index.js

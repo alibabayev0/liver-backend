@@ -1,6 +1,6 @@
 const httpStatus = require('http-status');
-const pick = require('../utils/pick');
 const jwt = require('jsonwebtoken');
+const pick = require('../utils/pick');
 const ApiError = require('../utils/api_error');
 const catchAsync = require('../utils/catch_async');
 const { userService } = require('../services');

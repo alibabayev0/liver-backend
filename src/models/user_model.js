@@ -1,14 +1,15 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const validator = require('validator');
+const { uuid } = require('uuidv4');
+const joi = require('joi');
 const toJSON = require('./plugins/toJSON_plugin');
 const paginate = require('./plugins/paginate_plugin');
 const { roles } = require('../config/roles');
-const { uuid } = require('uuidv4');
 const validate = require('../middlewares/validate');
 const { oAuthValidation } = require('../validations');
-const joi = require('joi');
-const Schema = mongoose.Schema;
+
+const { Schema } = mongoose;
 
 const userSchema = Schema(
   {

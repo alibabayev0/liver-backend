@@ -1,5 +1,5 @@
 const passport = require('passport');
-const ApiError = require('../utils/api_error');
 const httpStatus = require('http-status');
+const ApiError = require('../utils/api_error');
 
-module.exports.oAuth = service => passport.authenticate(service, { session: false });
+module.exports.oAuth = (service) => passport.authenticate(service, { session: false });
