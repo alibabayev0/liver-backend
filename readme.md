@@ -1,18 +1,23 @@
 #May be
-~~Microservices
-~~Migration
-~~Documentation(Swagger)
+Documentation(Swagger)
 
 #Needs
-OAuth 2 
-plugins index.js
-
+oAuth 2 Tests.
 
 #InProgress
 
 
+#In Test
+OAuth 2 
+
 #Ready
-Error handler with http-status
+Error with Custom ApiError http-status
 Ratelimit
 Logging (winston and morgan)
-All Business Logic will written in services.
+Prettier
+Husky
+Jest(config)
+Passport
+Roles
+Rest
+plugins index.js
