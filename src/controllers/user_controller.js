@@ -1,24 +1,44 @@
-        const bcrypt = require('bcrypt');
+const httpStatus = require('http-status');
+const pick = require('../utils/pick');
 const jwt = require('jsonwebtoken');
+const ApiError = require('../utils/api_error');
+const catchAsync = require('../utils/catch_async');
+const { userService } = require('../services');
 
-var User = require('../models/user.model');
+const createUser = catchAsync(async (req, res) => {
+  const user = await userService.createUser(req.body);
+  res.status(httpStatus.CREATED).send(user);
+});
 
-exports.create = (req,res) =>{
-    res.send({status:'NOT_IMPLEMENTED:USER_LIST'});
-}
+const getUsers = catchAsync(async (req, res) => {
+  const filter = pick(req.query, ['name', 'role']);
+  const options = pick(req.query, ['sortBy', 'limit', 'page']);
+  const result = await userService.queryUsers(filter, options);
+  res.send(result);
+});
 
-exports.findAll = (req, res) => {
-    res.send({status:'NOT_IMPLEMENTED:USER_LIST'});
-};
+const getUser = catchAsync(async (req, res) => {
+  const user = await userService.getUserById(req.params.userId);
+  if (!user) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
+  }
+  res.send(user);
+});
 
-exports.findOne = (req, res) => {
-    res.send('NOT IMPLEMENTED: user create GET');
-};
+const updateUser = catchAsync(async (req, res) => {
+  const user = await userService.updateUserById(req.params.userId, req.body);
+  res.send(user);
+});
 
-exports.updateUser = (req, res) => {
-    res.send('NOT IMPLEMENTED: user create POST');
-};
+const deleteUser = catchAsync(async (req, res) => {
+  await userService.deleteUserById(req.params.userId);
+  res.status(httpStatus.NO_CONTENT).send();
+});
 
-exports.delete = (req, res) => {
-    res.send('NOT IMPLEMENTED: user delete GET');
+module.exports = {
+  createUser,
+  getUsers,
+  getUser,
+  updateUser,
+  deleteUser,
 };

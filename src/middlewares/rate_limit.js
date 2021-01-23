@@ -1,6 +1,6 @@
 const rateLimit = require('express-rate-limit');
 
-//Per hour max request count 5
+//  Per hour max request count 5
 const requestLimit = rateLimit({
   windowMs: 60 * 60 * 1000,
   max: 10,
@@ -8,5 +8,5 @@ const requestLimit = rateLimit({
 });
 
 module.exports = {
-    requestLimit,
+  requestLimit,
 };
