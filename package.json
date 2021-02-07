@@ -6,7 +6,7 @@
   "scripts": {
     "start": "pm2 start savesystem.config.json --no-daemon",
     "dev": "cross-env NODE_ENV=development nodemon src/index.js",
-    "test": "jest -i",
+    "test": "jest -i ",
     "test:watch": "jest -i --watchAll",
     "coverage": "jest -i --coverage",
     "coverage:coveralls": "jest -i --coverage --coverageReporters=text-lcov | coveralls",
@@ -30,12 +30,13 @@
     "cors": "^2.8.5",
     "cross-env": "^7.0.3",
     "dotenv": "^8.2.0",
-    "eslint": "^7.18.0",
     "express": "^4.17.1",
     "express-mongo-sanitize": "^2.0.2",
     "express-rate-limit": "^5.2.3",
+    "eslint": "^7.18.0",
     "helmet": "^4.3.1",
     "http-status": "^1.5.0",
+    "xss-clean": "^0.1.1",
     "joi": "^17.3.0",
     "jsonwebtoken": "^8.5.1",
     "mocha": "^8.2.1",
@@ -50,8 +51,7 @@
     "pm2": "^4.5.1",
     "uuidv4": "^6.2.6",
     "validator": "^13.5.2",
-    "winston": "^3.3.3",
-    "xss-clean": "^0.1.1"
+    "winston": "^3.3.3"
   },
   "devDependencies": {
     "coveralls": "^3.0.7",
