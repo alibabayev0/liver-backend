@@ -86,7 +86,6 @@ describe('Auth routes', () => {
   });
 
   describe('POST /v1/auth/login', () => {
-
     test('should return 200 and login user if email and password match', async () => {
       await insertUsers([userOne]);
       const loginCredentials = {
@@ -140,67 +139,72 @@ describe('Auth routes', () => {
   });
 
   describe('POST /v1/auth/facebook', () => {
-    test('should return 200 if token is valid', async() => {
+    test('should return 200 if token is valid', async () => {
       const loginCredentials = {
-        access_token: config.test.facebook
-      }
+        access_token: config.test.facebook,
+      };
 
       const res = await request(app).post('/v1/auth/facebook').send({ loginCredentials }).expect(httpStatus.OK);
 
-      const facebookRes = await request("https://graph.facebook.com/me").field("fields","id, name, email, picture").get(`${access_token}`).expect(httpStatus.OK);
+      const facebookRes = await request('https://graph.facebook.com/me')
+        .field('fields', 'id, name, email, picture')
+        .get(`${access_token}`)
+        .expect(httpStatus.OK);
 
       expect(res.body).toEqual({
         id: expect.anything(),
         name: facebookRes.body.name,
         email: facebookRes.body.email,
         services: {
-          facebook: access_token
+          facebook: access_token,
         },
         role: 'user',
       });
     });
 
-    test('should return 400 error if refresh token is missing from request body',async () =>{
+    test('should return 400 error if refresh token is missing from request body', async () => {
       await request(app).post('/v1/auth/facebook').send().expect(httpStatus.BAD_REQUEST);
     });
 
-    test('should return 404 error if refresh token is missing from request body',async () => {
+    test('should return 404 error if refresh token is missing from request body', async () => {
       const loginCredentials = {
-        access_token: Math.random().toString(36).substr(2)
-      }
+        access_token: Math.random().toString(36).substr(2),
+      };
       await request(app).post('/v1/auth/facebook').send({ loginCredentials }).expect(httpStatus.BAD_REQUEST);
     });
   });
 
   describe('POST /v1/auth/google', () => {
-    test('should return 200 if token is valid', async() => {
+    test('should return 200 if token is valid', async () => {
       const loginCredentials = {
-        access_token: config.test.google
-      }
+        access_token: config.test.google,
+      };
 
       const res = await request(app).post('/v1/auth/google').send({ loginCredentials }).expect(httpStatus.OK);
 
-      const googleRes = await request("https://www.googleapis.com/oauth2/v3/userinfo").get(`${access_token}`).expect(httpStatus.OK);
+      const googleRes = await request('https://www.googleapis.com/oauth2/v3/userinfo')
+        .get(`${access_token}`)
+        .expect(httpStatus.OK);
 
       expect(res.body).toEqual({
         id: expect.anything(),
         name: googleRes.body.name,
         email: googleRes.body.email,
         services: {
-          google: access_token
+          google: access_token,
         },
         role: 'user',
       });
     });
 
-    test('should return 400 error if refresh token is missing from request body',async () =>{
+    test('should return 400 error if refresh token is missing from request body', async () => {
       await request(app).post('/v1/auth/google').send().expect(httpStatus.BAD_REQUEST);
     });
 
-    test('should return 404 error if refresh token is missing from request body',async () => {
+    test('should return 404 error if refresh token is missing from request body', async () => {
       const loginCredentials = {
-        access_token: Math.random().toString(36).substr(2)
-      }
+        access_token: Math.random().toString(36).substr(2),
+      };
       await request(app).post('/v1/auth/google').send({ loginCredentials }).expect(httpStatus.BAD_REQUEST);
     });
   });
