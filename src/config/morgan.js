@@ -1,7 +1,6 @@
 const morgan = require('morgan');
 const config = require('./config');
 const logger = require('./logger');
-
 morgan.token('message', (req, res) => res.locals.errorMessage || '');
 
 const getIpFormat = () => (config.env === 'production' ? ':remote-addr - ' : '');
@@ -15,7 +14,7 @@ const successHandler = morgan(successResponseFormat, {
 
 const errorHandler = morgan(errorResponseFormat, {
   skip: (req, res) => res.statusCode < 400,
-  stream: { write: (message) => logger.error(message.trim()) },
+  stream: { write: (message) => logger.error(message.trim())},
 });
 
 module.exports = {

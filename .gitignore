@@ -6,3 +6,5 @@ jspm_packages/
 
 DockerFile
 .dockerignore
+
+/logs
