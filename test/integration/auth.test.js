@@ -93,9 +93,9 @@ describe('Auth routes', () => {
         password: userOne.password,
       };
 
-      const apiRes = await request(app).post('/v1/auth/login').send(loginCredentials).expect(httpStatus.OK);
+      const res = await request(app).post('/v1/auth/login').send(loginCredentials).expect(httpStatus.OK);
 
-      expect(apiRes.body.user).toEqual({
+      expect(res.body.user).toEqual({
         id: expect.anything(),
         name: userOne.name,
         email: userOne.email,
@@ -146,17 +146,13 @@ describe('Auth routes', () => {
 
       const res = await request(app).post('/v1/auth/facebook').send({ loginCredentials }).expect(httpStatus.OK);
 
-      const facebookRes = await request('https://graph.facebook.com/me')
-        .field('fields', 'id, name, email, picture')
-        .get(`${access_token}`)
-        .expect(httpStatus.OK);
-
       expect(res.body).toEqual({
         id: expect.anything(),
-        name: facebookRes.body.name,
-        email: facebookRes.body.email,
+        name: config.facebook.name,
+        email: config.facebook.email,
+        picture: config.google.picture,
         services: {
-          facebook: access_token,
+          facebook: config.facebook.id,
         },
         role: 'user',
       });
@@ -182,16 +178,13 @@ describe('Auth routes', () => {
 
       const res = await request(app).post('/v1/auth/google').send({ loginCredentials }).expect(httpStatus.OK);
 
-      const googleRes = await request('https://www.googleapis.com/oauth2/v3/userinfo')
-        .get(`${access_token}`)
-        .expect(httpStatus.OK);
-
       expect(res.body).toEqual({
         id: expect.anything(),
-        name: googleRes.body.name,
-        email: googleRes.body.email,
+        name: config.google.name,
+        email: config.google.email,
+        picture: config.google.picture,
         services: {
-          google: access_token,
+          facebook: config.google.id,
         },
         role: 'user',
       });

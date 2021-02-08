@@ -58,7 +58,21 @@ module.exports = {
     from: envVars.EMAIL_FROM,
   },
   test: {
-    google: envVars.GOOGLE_TEST_ACCESS_TOKEN,
-    facebook: envVars.FACEBOOK_TEST_ACCESS_TOKEN,
+    // It should change after 60 Days
+    google: {
+      id: 12345,
+      access_token: envVars.GOOGLE_TEST_ACCESS_TOKEN,
+      name: 'Greek',
+      email: 'sample@mail.com',
+      picture: 'https://gmail.com',
+    },
+    // It should change after 60 Days
+    facebook: {
+      id: 12345,
+      access_token: envVars.FACEBOOK_TEST_ACCESS_TOKEN,
+      name: 'Greek',
+      email: 'sample@mail.com',
+      picture: 'https://gmail.com',
+    },
   },
 };

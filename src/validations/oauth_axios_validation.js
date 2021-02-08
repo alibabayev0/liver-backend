@@ -17,9 +17,9 @@ const oAuthFacebook = Joi.object().keys({
   },
 });
 
-const oAuthYahoo = Joi.object().keys({});
+// const oAuthYahoo = Joi.object().keys({});
 
-const oAuthLinkedin = Joi.object().keys({});
+// const oAuthLinkedin = Joi.object().keys({});
 
 module.exports = {
   oAuthFacebook,

@@ -1,6 +1,7 @@
 const winston = require('winston');
-const config = require('./config');
 const moment = require('moment');
+const config = require('./config');
+
 const enumerateErrorFormat = winston.format((info) => {
   if (info instanceof Error) {
     Object.assign(info, { message: info.stack });
@@ -21,7 +22,7 @@ const logger = winston.createLogger({
       stderrLevels: ['error'],
     }),
     new winston.transports.File({
-      filename: __dirname + '/../../logs/LOG-' + moment(new Date()).format('YYYY-MM-DD_hh-mm') + '.log',
+      filename: `${__dirname}/../../logs/LOG-${moment(new Date()).format('YYYY-MM-DD_hh-mm')}.log`,
       maxsize: 1024 * 1024 * 10, // ~10MB
       format: winston.format.combine(winston.format.uncolorize()),
     }),

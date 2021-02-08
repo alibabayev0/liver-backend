@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 const deleteAtPath = (obj, path, index) => {
   if (index === path.length - 1) {
     delete obj[path[index]];

@@ -1,6 +1,5 @@
 const Joi = require('joi');
 const httpStatus = require('http-status');
-const { valid } = require('joi');
 const pick = require('../utils/pick');
 const ApiError = require('../utils/api_error');
 
