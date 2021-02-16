@@ -17,7 +17,7 @@ const login = {
 };
 
 const oAuth = {
-  body: Joi.object().keys({
+  query: Joi.object().keys({
     access_token: Joi.string().required(),
   }),
 };
